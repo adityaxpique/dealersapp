@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../Classes/Constants.dart';
 
 class distributorScreen extends StatefulWidget {
+  static String tag='admin-page';
   @override
   _distributorState createState() => _distributorState();
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../Classes/Constants.dart';
 
 class dealerScreen extends StatefulWidget {
+  static String tag ='dealer-page';
   @override
   _dealerState createState() => _dealerState();
 }
