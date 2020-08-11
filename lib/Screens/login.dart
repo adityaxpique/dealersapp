@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:dealersapp/Screens/home_page.dart';
+import'package:firebase_auth/firebase_auth.dart';
+import'package:firebase_database/firebase_database.dart';
+import'DivisionHeadScreen.dart';
+import'DealerScreen.dart';
+import'Distributor.dart';
 
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
@@ -48,7 +53,26 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(12),
         ),
         onPressed: () {
-          Navigator.of(context).pushNamed(HomePage.tag);
+          final db=FirebaseDatabase.instance.reference().child("Users");
+          db.once().then((DataSnapshot snapshot){
+            snapshot.value.forEach((key,values){
+
+              if(values["email"]==email&&values["password"]==password){
+                if(values["type"]=="admin"){
+                  Navigator.of(context).pushNamed(distributorScreen.tag);
+                }
+                if(values["type"]=="dealer"){
+                  Navigator.of(context).pushNamed(dealerScreen.tag);
+                }
+                if(values["type"]=="divisionHead"){
+                  Navigator.of(context).pushNamed(divisionheadScreen.tag);
+                }
+              }
+            });
+
+
+          });
+
         },
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
